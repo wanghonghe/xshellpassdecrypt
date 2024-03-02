@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,7 +35,7 @@ namespace SharpXDecrypt
                         Xsh xsh = XSHParser(xshPath);
                         if (xsh.encryptPw != null)
                         {
-                            Console.WriteLine("  XSHPath: " + xshPath);
+//                            Console.WriteLine("  XSHPath: " + xshPath);
                             xsh.password = Xdecrypt(xsh, userSID);
                             Console.WriteLine("  Host: " + xsh.host);
                             Console.WriteLine("  UserName: " + xsh.userName);
@@ -48,8 +48,8 @@ namespace SharpXDecrypt
             }
             else
             {
-                Console.WriteLine("[-] UserPath Not Found!");
-                Console.WriteLine("[-] Please try : .\\SharpXDecrypt.exe \"[SessionsPath]\"");
+                Console.WriteLine("[-] 未找到用户目录!");
+                Console.WriteLine("[-] 请在命令行中指定Session路径 : .\\SharpXDecrypt.exe \"[SessionsPath]\"");
             }
 
             return true;
@@ -63,7 +63,7 @@ namespace SharpXDecrypt
                 Xsh xsh = XSHParser(xshPath);
                 if (xsh.encryptPw != null)
                 {
-                    Console.WriteLine("  XSHPath: " + xshPath);
+//                    Console.WriteLine("  XSHPath: " + xshPath);
                     xsh.password = Xdecrypt(xsh, userSID);
                     Console.WriteLine("  Host: " + xsh.host);
                     Console.WriteLine("  UserName: " + xsh.userName);
@@ -119,7 +119,7 @@ namespace SharpXDecrypt
             }
             else
             {
-                Console.WriteLine("  MasterPassword Enable !");
+                Console.WriteLine("  主密码启用,请在命令行中输入主密码 : .\\SharpXDecrypt.exe \"[MasterPassword]\" !");
             }
             return password;
         }
@@ -198,7 +198,7 @@ namespace SharpXDecrypt
         }
         public static List<string> GetUserDataPath()
         {
-            Console.WriteLine("[*] Start GetUserPath....");
+            Console.WriteLine("[*] 开始获取用户目录....");
             List<string> userDataPath = new List<string>();
             string strRegPath = @"Software\\NetSarang\\Common";
             RegistryKey regRootKey;
@@ -213,18 +213,20 @@ namespace SharpXDecrypt
                     {
                         string strUserDataRegPath = strRegPath + "\\" + version + "\\UserData";
                         regSubKey = regRootKey.OpenSubKey(strUserDataRegPath);
-                        Console.WriteLine("  UserPath: " + regSubKey.GetValue("UserDataPath"));
+                        Console.WriteLine("  用户目录: "+regSubKey.GetValue("UserDataPath"));
                         userDataPath.Add(regSubKey.GetValue("UserDataPath").ToString());
                     }
-                    catch (NullReferenceException e)
+                    #pragma warning disable
+                    catch (NullReferenceException )
                     {
 
                     }
+                    #pragma warning restore
                 }
             }
             regSubKey.Close();
             regRootKey.Close();
-            Console.WriteLine("[*] Get UserPath Success !");
+            Console.WriteLine("[** √] 获取用户目录成功 !");
             Console.WriteLine();
             return userDataPath;
         }
