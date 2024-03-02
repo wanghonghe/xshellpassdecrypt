@@ -100,6 +100,7 @@ execute-assembly /path/to/SharpXDecrypt.exe  "C:\Users\asus\Documents\NetSarang 
 - v0.1.2, 2022-02-23, 修复Xshell5执行报错问题，增加指定session路径功能
 - v0.1.3, 2022-02-25, 修复7.0版本解密问题
 - v0.1.4, 2022-03-02, 处理UserDataPath获取失败后程序异常终止问题。
+- v0.1.5，2024-03-02，添加等待用户按任意键退出提示
 
 
 
