@@ -30,6 +30,10 @@ namespace SharpXDecrypt
                 XClass.Decrypt();
             }
             Console.WriteLine("[*] read done!");
+
+            // 等待用户按下任意键退出程序，当编译好好后可以直接双击运行而不是从cmd运行才能看到结果
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
         }
 
     }
